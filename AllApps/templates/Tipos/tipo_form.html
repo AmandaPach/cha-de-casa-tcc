@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% if tipo.pk %}
+        Editar tipo
+        
+    {% else %}
+       Criar tipo
+
+    {% endif %}
+{% endblock page_title %}
+
+{% block content %}
+    {% if tipo.pk %}
+        <h1>Editar tipo</h1>
+    
+    {% else %}
+     <h1>Cadastrar novo tipo</h1>
+     <p class="lead">
+        Preencha todos os campos obrigatórios!
+     </p>
+     <hr>
+
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form | crispy }}
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="{% url 'tipo-list' %}" class="btn btn-secondary">Voltar</a>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    

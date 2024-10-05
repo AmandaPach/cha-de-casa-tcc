@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Cidades
+{% endblock page_title %}
+
+{% block content %}
+<h1>Lista de Cidades</h1>
+
+    {% if cidades %}
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-light">
+                    <th scope="col">#</th>
+                    <th scope="col">Cidades</th>
+                    <th scope="col">DDD</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Data de Cadastro</th>
+                    <th scope="col">Data de Alteração</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cidade in cidades %}
+                    <tr>
+                        <th scope="row">{{cidade.pk}}</th>
+                        <td>{{cidade.nome_cidade}}</td>
+                        <td>{{cidade.ddd_cidade | default:"-"}}</td>
+                        <td>{{cidade.estado}}</td>
+                        <td>{{cidade.data_cadastro}}</td>
+                        <td>{{cidade.data_ultima_alteracao}}</td>
+                        <td>
+                            <a href="{% url "cidade-update" pk=cidade.pk %}" class="btn btn-sm" style="background-color: #FFD700;">Editar</a>
+                            <a href="{% url "cidade-delete" pk=cidade.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+         </table>
+    {% else %}
+        <p> Sem dados cadastrados </p>
+    {% endif %} 
+    <a href="{% url 'cidade-create' %}" class="btn btn-primary">Novo cadastro</a>
+{% endblock content %}

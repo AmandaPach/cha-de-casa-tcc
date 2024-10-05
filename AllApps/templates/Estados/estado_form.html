@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% if estado.pk %}
+        Editar Estado
+        
+    {% else %}
+       Criar Estado
+
+    {% endif %}
+{% endblock page_title %}
+
+{% block content %}
+    {% if estado.pk %}
+        <h1>Editar estado</h1>
+    
+    {% else %}
+     <h1>Cadastrar novo estado</h1>
+     <p class="lead">
+        Preencha todos os campos obrigatórios!
+     </p>
+     <hr>
+
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{form | crispy}}
+
+        <div style="text-align: left;">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="{% url 'estado-list' %}" class="btn btn-secondary">Voltar</a>
+        <div>
+    </form>
+    
+{% endblock content %}

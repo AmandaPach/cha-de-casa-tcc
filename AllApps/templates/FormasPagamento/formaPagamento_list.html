@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Forma Pagamento
+{% endblock page_title %}
+
+{% block content %}
+<h1>Lista de Formas de Pagamento</h1>
+
+    {% if formasPagamento %}
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-light">
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Data de Cadastro</th>
+                    <th scope="col">Data de Alteração</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for formaPagamento in formasPagamento %}
+                    <tr>
+                        <th scope="row">{{formaPagamento.pk}}</th>
+                        <td>{{formaPagamento.nome_forma_pgto}}</td>
+                        <td>{{formaPagamento.descricao_forma_pgto}}</td>
+                        <td>{{formaPagamento.data_cadastro}}</td>
+                        <td>{{formaPagamento.data_ultima_alteracao}}</td>
+                        <td>
+                           <a href="{% url 'formaPagamento-update' pk=formaPagamento.pk %}" class="btn btn-sm" style="background-color: #FFD700;">Editar</a>
+                           <a href="{% url 'formaPagamento-delete' pk=formaPagamento.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+         </table>
+    {% else %}
+        <p> Sem dados cadastrados </p>
+    {% endif %}
+    <a href="{% url 'formaPagamento-create' %}" class="btn btn-primary">Novo cadastro</a> 
+{% endblock content %}

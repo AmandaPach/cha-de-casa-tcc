@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Condição Pagamento
+{% endblock page_title %}
+
+{% block content %}
+<h1>Lista de Condições Pagamento</h1>
+
+    {% if condicoesPagamento %}
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-light">
+                    <th scope="col">#</th>
+                    <th scope="col">Condição</th>
+                    <th scope="col">Juros</th>
+                    <th scope="col">Deconto</th>
+                    <th scope="col">Data de Cadastro</th>
+                    <th scope="col">Data de Alteração</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for condicaoPagamento in condicoesPagamento %}
+                    <tr>
+                        <th scope="row">{{condicaoPagamento.pk}}</th>
+                        <td>{{condicaoPagamento.nome_condicao_pgto}}</td>
+                        <td>{{condicaoPagamento.juros_mensais_condicao_pgto}}</td>
+                        <td>{{condicaoPagamento.desconto_por_antecipacao_condicao_pgto}}</td>
+                        <td>{{condicaoPagamento.data_cadastro}}</td>
+                        <td>{{condicaoPagamento.data_ultima_alteracao}}</td>
+                        <td>
+                           <a href="{% url 'condicaoPagamento-update' pk=condicaoPagamento.pk %}" class="btn btn-sm" style="background-color: #FFD700;">Editar</a>
+                           <a href="{% url 'condicaoPagamento-delete' pk=condicaoPagamento.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+         </table>
+    {% else %}
+        <p> Sem dados cadastrados </p>
+    {% endif %}
+    <a href="{% url 'condicaoPagamento-create' %}" class="btn btn-primary">Novo cadastro</a> 
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Confirmar exclusão Categoria
+{% endblock title %}
+
+{% block content %}
+    <h1>Excluir Categoria?</h1>
+        <p class="lead">Essa ação irá deletar todos os outros registros vinculados a <strong>{{categoria.nome_categoria}}</strong>.</p>
+        <hr>
+        
+        <form method="POST">
+            {% csrf_token %}
+
+            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+            <a href="{% url "categoria-list" %}" class="btn btn-primary btn-sm">Voltar</a>
+        </form>
+{% endblock content %}

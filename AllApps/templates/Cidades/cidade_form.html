@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% if cidade.pk %}
+        Editar Cidade
+        
+    {% else %}
+       Criar Cidade
+
+    {% endif %}
+{% endblock page_title %}
+
+{% block content %}
+    {% if cidade.pk %}
+        <h1>Editar cidade</h1>
+    
+    {% else %}
+     <h1>Cadastrar novo cidade</h1>
+     <p class="lead">
+        Preencha todos os campos obrigatórios!
+     </p>
+     <hr>
+
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{form | crispy}}
+        
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="{% url 'cidade-list' %}" class="btn btn-secondary">Voltar</a>
+    </form>
+    
+{% endblock content %}

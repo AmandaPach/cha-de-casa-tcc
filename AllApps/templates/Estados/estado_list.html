@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Estados
+{% endblock page_title %}
+
+{% block content %}
+<h1>Lista de Estados</h1>
+
+    {% if estados %}
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-light">
+                    <th scope="col">#</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">UF</th>
+                    <th scope="col">País</th>
+                    <th scope="col">Data de Cadastro</th>
+                    <th scope="col">Data de Alteração</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for estado in estados %}
+                    <tr>
+                        <th scope="row">{{estado.pk}}</th>
+                        <td>{{estado.nome_estado}}</td>
+                        <td>{{estado.sigla_estado | default:"-"}}</td>
+                        <td>{{estado.pais}}</td>
+                        <td>{{estado.data_cadastro}}</td>
+                        <td>{{estado.data_ultima_alteracao}}</td>
+                        <td>
+                            <a href="{% url "estado-update" pk=estado.pk %}" class="btn btn-sm" style="background-color: #FFD700;">Editar</a>
+                            <a href="{% url "estado-delete" pk=estado.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+         </table>
+    {% else %}
+        <p> Sem dados cadastrados </p>
+    {% endif %} 
+    <a href="{% url 'estado-create' %}" class="btn btn-primary">Novo cadastro</a>
+{% endblock content %}

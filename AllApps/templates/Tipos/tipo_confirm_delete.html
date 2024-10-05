@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Confirmar exclusão Tipo
+{% endblock title %}
+
+{% block content %}
+    <h1>Excluir Tipo?</h1>
+        <p class="lead">Essa ação irá deletar todos os outros registros vinculados a <strong>{{tipo.nome_tipo}}</strong>.</p>
+        <hr>
+        
+        <form method="POST">
+            {% csrf_token %}
+
+            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+            <a href="{% url "tipo-list" %}" class="btn btn-primary btn-sm">Voltar</a>
+        </form>
+{% endblock content %}

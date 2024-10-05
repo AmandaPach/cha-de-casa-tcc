@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    {% if categoria.pk %}
+        Editar categoria
+        
+    {% else %}
+       Criar categoria
+
+    {% endif %}
+{% endblock page_title %}
+
+{% block content %}
+    {% if categoria.pk %}
+        <h1>Editar categoria</h1>
+    
+    {% else %}
+     <h1>Cadastrar novo categoria</h1>
+     <p class="lead">
+        Preencha todos os campos obrigatórios!
+     </p>
+     <hr>
+
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form | crispy }}
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="{% url 'categoria-list' %}" class="btn btn-secondary">Voltar</a>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
