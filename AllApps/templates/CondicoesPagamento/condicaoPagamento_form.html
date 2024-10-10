@@ -27,7 +27,14 @@
     <form method="POST">
         {% csrf_token %}
         {{form | crispy}}
-            
+
+        <h3>Parcelas</h3>
+        {{ formset.management_form }}
+        {% for form in formset %}
+            <div class="formset_row">
+            </div>
+        {% endfor %}
+          
         <div style="text-align: left;">
             <button type="submit" class="btn btn-primary">Salvar</button>
             <a href="{% url 'condicaoPagamento-list' %}" class="btn btn-secondary">Voltar</a>

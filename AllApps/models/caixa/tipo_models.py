@@ -4,8 +4,8 @@ from django.utils import timezone
 class Tipo(models.Model):
 
     id_tipo = models.AutoField(primary_key=True, verbose_name="ID")
-    nome_tipo = models.CharField(max_length=100, verbose_name="Tipo")
-    descricao_tipo = models.CharField(max_length=200, verbose_name="Descrição")
+    nome_tipo = models.CharField(max_length=20, verbose_name="Tipo")
+    descricao_tipo = models.TextField(max_length=100, blank=True, null=True, verbose_name="Descrição")
     data_cadastro = models.DateTimeField(default=timezone.now, null=False, blank=False, verbose_name="Data Cadastro")
     data_ultima_alteracao = models.DateTimeField(auto_now=True, null=False, blank=False, verbose_name="Última Alteração")
     

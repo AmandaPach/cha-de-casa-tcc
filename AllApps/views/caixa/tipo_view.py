@@ -21,7 +21,7 @@ class TipoCreateView(CreateView):
             return super().form_valid(form)
         except IntegrityError as e:
             if 'UNIQUE constraint' in str(e):
-                form.add_error('nome_tipo', 'Este tipo já está cadastrado.')
+                form.add_error('nome_tipo', 'Já cadastrado')
                 return self.form_invalid(form)
             else:
                 raise e
@@ -37,7 +37,7 @@ class TipoUpdateView(UpdateView):
             return super().form_valid(form)
         except IntegrityError as e:
             if 'UNIQUE constraint' in str(e):
-                form.add_error('nome_tipo', 'Este tipo já está cadastrado.')
+                form.add_error('nome_tipo', 'Já cadastrado')
                 return self.form_invalid(form)
             else:
                 raise e

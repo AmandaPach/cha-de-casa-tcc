@@ -9,16 +9,30 @@ class CategoriaForm(forms.ModelForm):
         fields = [
             'nome_categoria', 'descricao_categoria', 
         ]
+
+        help_texts = {
+            'nome_categoria': 'Digite o nome da categoria. Ex: "Bebida", "Sobremesa", etc.',
+            'descricao_categoria': 'Descreva brevemente a categoria de produto.',
+        }
+
+        widgets = {
+            'descricao_categoria': forms.Textarea(attrs={
+                'rows': 4,  # Altura do campo
+                'cols': 40,  # Largura do campo
+            }),
+        }
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'post'
-        self.helper.layout = Layout(
-            Row(
-                Column(Field('nome_categoria', css_class='form-control'), css_class='col-md-6'),
-                Column(Field('descricao_categoria', css_class='form-control'), css_class='col-md-6'),
-                css_class='form-row'
-            ),
-            Submit('submit', 'Salvar', css_class='btn btn-primary')
-        )
+
+        # Adicionando o estilo de uppercase enquanto o usuário digita
+        self.fields['nome_categoria'].widget.attrs.update({
+            'style': 'text-transform: uppercase;',
+            'class': 'form-control'
+        })
+        self.fields['descricao_categoria'].widget.attrs.update({
+            'style': 'text-transform: uppercase;',
+            'class': 'form-control'
+        })

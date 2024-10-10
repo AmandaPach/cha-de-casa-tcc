@@ -24,7 +24,10 @@
 
     {% endif %}
 
+    <style>
+    </style>
     <form method="POST">
+        
         {% csrf_token %}
 
         {{ form | crispy }}
@@ -40,3 +43,6 @@
             </div>
         {% endfor %}
     {% endif %}
+
+
+{% endblock content %}
