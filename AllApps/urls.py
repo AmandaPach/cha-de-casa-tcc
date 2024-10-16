@@ -12,6 +12,8 @@ from AllApps.views.caixa.condicaoPagamento_view import CondicaoPagamentoListView
 from AllApps.views.caixa.produto_view import ProdutoListView, ProdutoCreateView, ProdutoUpdateView, ProdutoDeleteView
 from AllApps.views.caixa.tipo_view import TipoListView, TipoCreateView, TipoUpdateView, TipoDeleteView
 from AllApps.views.caixa.categoria_view import CategoriaListView, CategoriaCreateView, CategoriaUpdateView, CategoriaDeleteView
+from AllApps.views.caixa.compra_view import ComprasListView, ComprasCreateView, ComprasUpdateView, ComprasDeleteView
+
 
 
 urlpatterns = [
@@ -76,4 +78,9 @@ urlpatterns = [
     path('tipo/create', TipoCreateView.as_view(), name='tipo-create'),
     path('tipo/update/<int:pk>', TipoUpdateView.as_view(), name='tipo-update'),
     path('tipo/delete/<int:pk>', TipoDeleteView.as_view(), name='tipo-delete'),
+
+    path('compra/', ComprasListView.as_view(), name='compra-list'),
+    path('compra/create', ComprasCreateView.as_view(), name='compra-create'),
+    path('compra/update/<int:pk>', ComprasUpdateView.as_view(), name='compra-update'),
+    path('compra/delete/<int:pk>', ComprasDeleteView.as_view(), name='compra-delete'),
 ]

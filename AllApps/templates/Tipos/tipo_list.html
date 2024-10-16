@@ -6,12 +6,11 @@
 
 {% block content %}
 <h1>Lista de Tipos</h1>
-
     {% if tipos %}
         <table class="table table-hover">
             <thead>
                 <tr class="table-light">
-                    <th scope="col">Cod</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Tipos</th>
                     <th scope="col">Data de Cadastro</th>
                     <th scope="col">Data de Alteração</th>
@@ -36,5 +35,5 @@
     {% else %}
         <p> Sem dados cadastrados </p>
     {% endif %} 
-    <a href="{% url 'tipo-create' %}" class="btn btn-primary">Novo cadastro</a>
+        <a href="{% url 'tipo-create' %}" class="btn btn-primary">Novo cadastro</a>
 {% endblock content %}

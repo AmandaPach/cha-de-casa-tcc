@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    Compras
+{% endblock page_title %}
+
+{% block content %}
+<script>        
+    function abrirModal(){
+       $.ajax({
+        url: 'create',
+        type: 'GET',
+        success:function(data){
+            $('#form-modal-body').html(data.data); // Atualiza o corpo da modal
+            $('#form-modal').modal('show');
+        }
+       });
+    }
+</script>
+
+<h1>Lista de Compras</h1>
+
+    {% if compras %}
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-light">
+                    <th scope="col">ID</th>
+                    <th scope="col">Fornecedor</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Custo</th>
+                    <th scope="col">Desconto</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Data Chegada</th>
+                    <th scope="col">Data Emissão</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for compra in compras %}
+                    <tr>
+                        <th scope="row">{{compra.pk}}</th>
+                        <td>{{compra.fornecedor_id.nome_fantasia_fornecedor}}</td>
+                        <td>{{compra.produto_id}}</td>
+                        <td>{{compra.quantidade}}</td>
+                        <td>{{compra.custo}}</td>
+                        <td>{{compra.desconto}}</td>
+                        <td>{{compra.valor_total}}</td>
+                        <td>{{compra.data_chegada}}</td>
+                        <td>{{compra.data_emissao}}</td>
+                        <td>
+                           <a href="{% url "compra-update" pk=compra.pk %}" class="btn btn-sm" style="background-color: #FFD700;">Editar</a>
+                           <a href="{% url "compra-delete" pk=compra.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+         </table>
+    {% else %}
+        <p> Sem dados cadastrados </p>
+    {% endif %} 
+    
+    <div class="modal fade" id="form-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Cadastrar nova compra</h3>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">Preencha todos os campos obrigatórios!</p>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        conteúdo
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Salvar</button>
+                            <a href="{% url "compra-list" %}" class="btn btn-secondary">Excluir</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>        
+    </div>       
+    <button type="submit" class="btn btn-primary" onclick="abrirModal()" >Novo Cadastro</button>
+
+{% endblock content %}

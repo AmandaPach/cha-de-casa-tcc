@@ -4,6 +4,8 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, V
 from AllApps.models.caixa.tipo_models import Tipo
 from AllApps.forms.caixa.tipo_forms import TipoForm
 from django.db import IntegrityError
+from django.contrib import messages
+
 
 class TipoListView(ListView):
     model = Tipo
